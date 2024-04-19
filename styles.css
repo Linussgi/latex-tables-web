@@ -1,0 +1,75 @@
+body {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+#banner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10vh;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    font-size: 24px;
+    line-height: 10vh;
+    /* Vertical centering */
+}
+
+
+main {
+    flex-grow: 1;
+    padding: 20px;
+    margin-top: 15vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+textarea {
+    width: calc(75% - 20px);
+    height: 200px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    resize: vertical;
+}
+
+button {
+    display: block;
+    width: fit-content;
+    padding: 14px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 20px;
+    /* Add consistent margin with the input box */
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#output {
+    width: calc(75% - 20px);
+    min-height: 200px;
+    padding: 10px;
+    margin-bottom: 20px;
+    /* Add consistent margin with the input box */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    white-space: pre-wrap;
+    overflow-y: auto;
+}
