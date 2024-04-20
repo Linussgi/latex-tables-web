@@ -45,3 +45,7 @@ function convertToLatex() {
 
     outputDiv.textContent = latexTable.join("\n");
 }
+
+const convertButton = document.getElementById('convertButton');
+
+convertButton.addEventListener('click', convertToLatex);

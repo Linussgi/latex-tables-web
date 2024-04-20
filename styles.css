@@ -19,7 +19,6 @@ body {
     text-align: center;
     font-size: 24px;
     line-height: 10vh;
-    /* Vertical centering */
 }
 
 
@@ -54,7 +53,6 @@ button {
     cursor: pointer;
     font-size: 16px;
     margin-bottom: 20px;
-    /* Add consistent margin with the input box */
 }
 
 button:hover {
@@ -66,7 +64,6 @@ button:hover {
     min-height: 200px;
     padding: 10px;
     margin-bottom: 20px;
-    /* Add consistent margin with the input box */
     border: 1px solid #ccc;
     border-radius: 5px;
     font-family: 'Courier New', Courier, monospace;
