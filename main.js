@@ -21,31 +21,67 @@ function createRow(row) {
 }
 
 function convertToLatex() {
-    let input = document.getElementById("input").value;
-    let outputDiv = document.getElementById("output");
+    const inputTextArea = document.getElementById("input");
+    const outputDiv = document.getElementById("output");
 
-    let latexTable = ["\\begin{table}", "\\centering"];
+    const inputData = inputTextArea.value.trim();
 
-    let tabData = strToTab(input);
+    const rows = inputData.split("\n");
+    const table = rows.map(row => row.split("\t"));
 
-    let numCols = tabData[0].length;
-    let colTerm = Array(numCols).fill("|c").join("") + "|";
-    let beginTabular = "\\begin{tabular}" + `{|${colTerm}|}`;
+    let latexTable = "\\begin{table}\n\\centering\n\\begin{tabular}{";
 
-    latexTable.push(beginTabular);
-    latexTable.push("\\hline", "\\rowcolor{gray!30}");
+    const numCols = table[0].length;
 
-    for (let i = 0; i < tabData.length; i++) {
-        let latexRow = createRow(tabData[i]);
-        latexTable.push(latexRow);
-        latexTable.push("\\hline");
+    for (let i = 0; i < numCols; i++) {
+        latexTable += "|c";
     }
+    latexTable += "|}\n\\hline\n";
 
-    latexTable.push("\\end{tabular}", "\\caption{Caption}", "\\label{tab:label}", "\\end{table}");
+    latexTable += ("\\rowcolor{gray!30}\n");
 
-    outputDiv.textContent = latexTable.join("\n");
+    table.forEach((row, rowIndex) => {
+        row.forEach((cell, cellIndex) => {
+            latexTable += cell;
+            if (cellIndex !== row.length - 1) {
+                latexTable += " & ";
+            } else {
+                latexTable += " \\\\";
+            }
+        });
+
+        if (rowIndex !== table.length - 1) {
+            latexTable += "\n\\hline\n";
+        } else {
+            latexTable += "\n\\hline";
+        }
+    });
+
+
+    latexTable += "\n\\end{tabular}\n\\caption{Caption}\n\\label{tab:label}\n\\end{table}";
+
+    copyButton.textContent = "Copy to Clipboard";
+    outputDiv.textContent = latexTable;
 }
 
-const convertButton = document.getElementById('convertButton');
+function copyToClipboard() {
+    const outputDiv = document.getElementById("output");
 
-convertButton.addEventListener('click', convertToLatex);
+    const latexTable = outputDiv.textContent.trim();
+
+    navigator.clipboard.writeText(latexTable)
+        .then(() => {
+            copyButton.textContent = "Copied!";
+        })
+        .catch((error) => {
+            console.error("Error copying text:", error);
+            copyButton.textContent = "Error Copying Text";
+        });
+
+}
+
+const convertButton = document.getElementById("convertButton");
+convertButton.addEventListener("click", convertToLatex);
+
+const copyButton = document.getElementById("copyButton");
+copyButton.addEventListener("click", copyToClipboard);
