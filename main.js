@@ -80,8 +80,13 @@ function copyToClipboard() {
 
 }
 
-const convertButton = document.getElementById("convertButton");
-convertButton.addEventListener("click", convertToLatex);
+document.addEventListener('DOMContentLoaded', function () {
+    const inputTextarea = document.getElementById('input');
+    inputTextarea.addEventListener('input', convertToLatex);
+});
+
+// const convertButton = document.getElementById("convertButton");
+// convertButton.addEventListener("click", convertToLatex);
 
 const copyButton = document.getElementById("copyButton");
 copyButton.addEventListener("click", copyToClipboard);
